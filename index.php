@@ -73,6 +73,9 @@
                 <?php foreach ($hotels as $hotel): ?>
                     <tr>
                         <td><?php echo $hotel['name']; ?></td>
+                        <td><?php echo $hotel['description']; ?></td>
+                        <!-- trasformare il valore boleano parking  a SI/NO utilizzando un ternario-->
+                        <td><?php echo $hotel['parking']?'Yes': 'No'; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
