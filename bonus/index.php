@@ -40,6 +40,10 @@
         ],
 
     ];
+    // filtriamo fra gli hotel quale di questi hanno il parcheggio 
+
+    $HotelsFiltered = isset($_GET['parking']) && $_GET['parking']== 'yes'?
+    array_filter($hotels, fn($hotel)=> $hotel['parking']) : $hotels;
 
 ?>
 
@@ -55,9 +59,11 @@
         <!-- BONUS 1 - Aggiungere un form ad inizio pagina che tramite una richiesta GET permetta di filtrare gli hotel che hanno un parcheggio. -->
         <form action="" class="mb-4" method="GET">
             <div class="form-check"> 
-                <input type="checkbox" class="check-input" id="parking" name="parking" value="yes" <?php ?>>
+                <input type="checkbox" class="check-input" id="parking" name="parking" value="yes" <?php if (isset($_GET['parking']) && $_GET['parking'] == 'yes') echo 'checked'; ?>>
+                <label class="form-check-label" for="parking">Mostra solo hotel con parcheggio</label>
             </div>
-
+            <!-- inserimento bottone submit per filtrare -->
+            <button type="submit" class="btn btn-primary mt-2">Filtra</button>
         </form>
 
         <!-- creazione container per la table con bootstrap -->
@@ -78,12 +84,15 @@
             <!-- corpo tabella -->
             <tbody>
                 <!-- utilizzo del foreach per iterare nell array $Hotels e generare dinamicamente i tb della table -->
-                <?php foreach ($hotels as $hotel): ?>
+
+                <!-- bonus cambiamo l array hotels per utilizzare la chiamata get e filtrare nell array  -->
+                 
+                <?php foreach ($HotelsFiltered  as $hotel): ?>
                     <tr>
                         <td><?php echo $hotel['name']; ?></td>
                         <td><?php echo $hotel['description']; ?></td>
                         <!-- trasformare il valore boleano parking  a SI/NO utilizzando un ternario-->
-                        <td><?php echo $hotel['parking']?'Yes': 'No'; ?></td>
+                        <td><?php echo $hotel['parking']?'yes': 'no'; ?></td>
                         <td><?php echo $hotel['vote']; ?></td>
                         <td><?php echo $hotel['distance_to_center']; ?></td>
                     </tr>
