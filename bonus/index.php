@@ -52,6 +52,14 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
+        <!-- BONUS 1 - Aggiungere un form ad inizio pagina che tramite una richiesta GET permetta di filtrare gli hotel che hanno un parcheggio. -->
+        <form action="" class="mb-4" method="GET">
+            <div class="form-check"> 
+                <input type="checkbox" class="check-input" id="parking" name="parking" value="yes" <?php ?>>
+            </div>
+
+        </form>
+
         <!-- creazione container per la table con bootstrap -->
         <div class='container mt-5'>
             <h1 class='mb-4'>php-hotel</h1>
