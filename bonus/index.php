@@ -40,11 +40,19 @@
         ],
 
     ];
+
+    $hotelsFiltered = $hotels;
     // filtriamo fra gli hotel quale di questi hanno il parcheggio 
 
-    $HotelsFiltered = isset($_GET['parking']) && $_GET['parking']== 'yes'?
-    array_filter($hotels, fn($hotel)=> $hotel['parking']) : $hotels;
+    if (isset($_GET['parking']) && $_GET['parking'] == 'yes') {
+        $hotelsFiltered = array_filter($hotelsFiltered, fn($hotel) => $hotel['parking']);
+    }
 
+    if (isset($_GET['vote']) && is_numeric($_GET['vote'])) {
+        // utilizzamo (int) per convertire il valore inviato dal get da stringa  a numero
+        $voteFiltered = (int)$_GET['vote'];
+        $hotelsFiltered = array_filter($hotelsFiltered, fn($hotel) => $hotel['vote'] == $voteFiltered );
+    }
 ?>
 
 <!DOCTYPE html>
@@ -56,19 +64,27 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <!-- BONUS 1 - Aggiungere un form ad inizio pagina che tramite una richiesta GET permetta di filtrare gli hotel che hanno un parcheggio. -->
-        <form action="" class="mb-4" method="GET">
-            <div class="form-check"> 
-                <input type="checkbox" class="check-input" id="parking" name="parking" value="yes" <?php if (isset($_GET['parking']) && $_GET['parking'] == 'yes') echo 'checked'; ?>>
-                <label class="form-check-label" for="parking">Mostra solo hotel con parcheggio</label>
-            </div>
-            <!-- inserimento bottone submit per filtrare -->
-            <button type="submit" class="btn btn-primary mt-2">Filtra</button>
-        </form>
-
+        
         <!-- creazione container per la table con bootstrap -->
         <div class='container mt-5'>
-            <h1 class='mb-4'>php-hotel</h1>
+            <h1 class='mb-4'>PHP-HOTEL</h1>
+            <!-- BONUS 1 - Aggiungere un form ad inizio pagina che tramite una richiesta GET permetta di filtrare gli hotel che hanno un parcheggio. -->
+            <form action="" class="mb-4" method="GET">
+                <!-- sezione form 1 filtro parcheggi -->
+                <div class="form-check"> 
+                    <input type="checkbox" class="check-input" id="parking" name="parking" value="yes" <?php if (isset($_GET['parking']) && $_GET['parking'] == 'yes') echo 'checked'; ?>>
+                    <label class="form-check-label" for="parking">Mostra solo hotel con parcheggio</label>
+                </div>
+
+                <!-- sezione form 2 'vote' -->
+                <div class="form-group mt-2">
+                    <label for="vote">Voto minimo:</label>
+                    <input type="number" class="form-control" id="vote" name="vote" value="<?php echo isset($_GET['vote']) ? $_GET['vote'] : ''; ?>" min="1" max="5">
+                </div>
+                <!-- inserimento bottone submit per filtrare -->
+                <button type="submit" class="btn btn-primary mt-2">Filtra</button>
+            </form>
+
             <!-- inserimento tabella bootstrap -->
             <table class="table table-bordered table-striped">
             <thead>
@@ -87,7 +103,7 @@
 
                 <!-- bonus cambiamo l array hotels per utilizzare la chiamata get e filtrare nell array  -->
                  
-                <?php foreach ($HotelsFiltered  as $hotel): ?>
+                <?php foreach ($hotelsFiltered  as $hotel): ?>
                     <tr>
                         <td><?php echo $hotel['name']; ?></td>
                         <td><?php echo $hotel['description']; ?></td>
