@@ -76,6 +76,9 @@
                     <label class="form-check-label" for="parking">Mostra solo hotel con parcheggio</label>
                 </div>
 
+                <!-- 2 -BONUS Aggiungere un secondo campo al form che permetta di filtrare gli hotel per voto (es. inserisco 3 ed ottengo tutti gli hotel che hanno un voto di tre stelle o superiore) -->
+
+
                 <!-- sezione form 2 'vote' -->
                 <div class="form-group mt-2">
                     <label for="vote">Voto minimo:</label>
