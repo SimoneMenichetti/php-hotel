@@ -45,44 +45,42 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>php-hotel</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <!-- creazione container per la table con bootstrap -->
-    <div class='container mt-5'>
-        <h1 class='mb-4'>php-hotel</h1>
-        <!-- inserimento tabella bootstrap -->
-        <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <!-- intestazione -->
-                <th>Name</th>
-                <th>Description</th>
-                <th>Parking</th>
-                <th>Vote</th>
-                <th>Distance to Center (km)</th>
-            </tr>
-        </thead>
-        <!-- corpo tabella -->
-         <tbody>
-            <!-- utilizzo del foreach per iterare nell array $Hotels e generare dinamicamente i tb della table -->
-            <?php foreach ($hotels as $hotel): ?>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>php-hotel</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- creazione container per la table con bootstrap -->
+        <div class='container mt-5'>
+            <h1 class='mb-4'>php-hotel</h1>
+            <!-- inserimento tabella bootstrap -->
+            <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    
+                    <!-- intestazione -->
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Parking</th>
+                    <th>Vote</th>
+                    <th>Distance to Center (km)</th>
                 </tr>
+            </thead>
+            <!-- corpo tabella -->
+            <tbody>
+                <!-- utilizzo del foreach per iterare nell array $Hotels e generare dinamicamente i tb della table -->
+                <?php foreach ($hotels as $hotel): ?>
+                    <tr>
+                        <td><?php echo $hotel['name']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </div>
 
-         </tbody>
-
-    </div>
-    
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
 </html>
